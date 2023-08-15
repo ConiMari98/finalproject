@@ -1,0 +1,62 @@
+let tasks=[]
+      
+document.querySelector('#push').onclick = function(){
+document.querySelector('#tasks').innerHTML= ""
+    if(document.querySelector('#newtask input').value.length == 0){
+        alert("Please Enter a Task")
+    }
+    else{
+         tasks.push(document.querySelector('#newtask input').value)
+        tasks.forEach((task, index) =>
+        {document.querySelector('#tasks').innerHTML += `
+                 <div class="task">
+                <span id="taskname">
+                  ${index+1}. ${task}
+                </span>
+                <button class="delete">
+                    <i class="far fa-check"></i>
+                </button>
+            </div>
+        `;
+            
+        })
+     var current_tasks = document.querySelectorAll(".delete");
+        for(var i=0; i<current_tasks.length; i++){
+            current_tasks[i].onclick = function(){
+            		var index = Array.from(current_tasks).indexOf(this)
+                this.style.backgroundColor = "green";
+            }
+        }
+        for(var i=0; i<tasks.length; i++){
+            tasks[i].onclick = function(){
+                this.classList.toggle('completed');
+            }
+        }
+        document.querySelector("#newtask input").value = "";
+    }
+}
+function startTime() {
+  const today = new Date();
+  let h = today.getHours();
+  let m = today.getMinutes();
+  let s = today.getSeconds();
+  let dd = String(today.getDate()).padStart(2, '0');
+      let mm = ['Jan', 'Feb', 'Ma', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][today.getMonth()]; //January is 0!
+  let yyyy = today.getFullYear();
+  m = checkTime(m);
+  s = checkTime(s);
+  document.getElementById('clock').innerHTML =  mm + " "+ dd + " " + h + ":" + m;
+  setTimeout(startTime, 1000);
+}
+
+function checkTime(i) {
+  if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+  return i;
+}
+
+const button = document.querySelector("input");
+
+document.getElementById("myBtn").addEventListener("click", function(){
+    document.getElementById("demo").innerHTML = " ";
+    event.preventDefault();
+});
